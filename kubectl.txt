@@ -1,0 +1,209 @@
+sudo apt-get update
+
+sudo apt-get upgrade
+
+sudo systemctl restart irqbalance.service multipathd.service packagekit.service polkit.service ssh.service udisks2.service
+
+sudo systemctl restart ModemManager.service
+
+sudo /etc/needrestart/restart.d/dbus.service
+
+sudo systemctl restart networkd-dispatcher.service
+
+sudo systemctl restart systemd-logind.service
+
+sudo systemctl restart unattended-upgrades.service
+
+sudo systemctl restart user@1000.service
+
+sudo apt-get install docker.io
+
+sudo groupadd docker
+sudo usermod -aG docker $USER
+{disconnect the power shell}
+and again connect
+
+
+
+sudo apt-get install curl -y
+
+
+sudo apt-get install apt-transport-https -y
+
+
+wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+
+
+sudo cp minikube-linux-amd64 /usr/local/bin/minikube
+
+
+sudo chmod 755 /usr/local/bin/minikube
+
+
+minikube version
+
+
+
+curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+
+chmod +x ./kubectl
+
+
+sudo mv ./kubectl /usr/local/bin/kubectl
+
+
+kubectl version -o json
+
+
+
+minikube start --driver='docker'
+
+
+kubectl config view
+
+
+kubectl cluster-info
+
+
+kubectl get nodes
+
+
+kubectl get pod -A
+
+
+
+minikube ssh
+
+exit  (the power shell  and connect again connect the power shell)
+
+
+
+minikube status
+
+
+minikube addons list
+
+
+
+git --version
+
+
+git clone https://github.com/nirajsonawane/kubernetes-full-stack-example.git
+
+
+
+ls -ltr
+
+
+cd kubernetes-full-stack-example/
+
+ls -ltr
+cd k8s/
+
+ls -ltr
+
+
+ kubectl apply -f  student-app-client-deployment.yaml
+
+ kubectl apply -f  student-app-client-service.yaml
+
+ kubectl apply -f  student-app-api-deployment.yaml
+
+ kubectl apply -f  student-app-api-service.yaml
+
+ kubectl apply -f  mongo-persistent-volume-claim.yaml
+
+ kubectl apply -f  mongo-deployment.yaml
+
+  kubectl apply -f mongo-service.yaml
+
+
+
+
+
+
+nano student-app-ingress.yaml
+
+#apiVersion: networking.k8s.io/v1beta1 # for versions before 1.14 use extensions/v1beta1
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: student-app-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+  - http:
+      paths:
+        - path: /?(.*)
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: student-app-client-service
+              port: 
+                number: 80
+        - path: /api/?(.*)
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: student-app-api
+              port: 
+                number: 8080
+
+
+    kubectl apply -f student-app-ingress.yaml
+
+ kubectl get ing
+
+ minikube addons enable ingress
+
+
+kubectl port-forward --address 0.0.0.0 service/ingress-nginx-controller -n ingress-nginx 8080:80
+
+
+ip adresss of instance  and  8080
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
