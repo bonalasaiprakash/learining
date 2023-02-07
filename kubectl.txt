@@ -4,6 +4,8 @@ sudo apt-get upgrade
 
 sudo systemctl restart irqbalance.service multipathd.service packagekit.service polkit.service ssh.service udisks2.service
 
+sudo /etc/needrestart/restart.d/systemd-manager
+
 sudo systemctl restart ModemManager.service
 
 sudo /etc/needrestart/restart.d/dbus.service
